@@ -1,3 +1,4 @@
+
 ##Pasos seguidos para la instalacion de Xv6
 
 
@@ -12,3 +13,4 @@
 Un gran problema que tuve, fue que por mas que siguiera las instrucciones de varias distintas paginas, siempre tenia los mismos mensajes de error 'Error: 1' o 'Error: 127'. Dos errores que me estuvieron molestando constantemente ya que por mas que intentara de solucionarlo segun lo que encontraba en el internet nunca se solucionaban mis problemas, aun despues de haber reinstalado Ubuntu y todo tipo de posibles soluciones que se me ocurrieron. La solucion de este problema la verdad la desconozco, porque despues de haber repetido varias veces el mismo intento de solucion me termino funcionando.
 
 Despues de este gran problema puedo confirmar con seguirdad que logre instalar correctamente Xv6
+![Screenshot 2024-08-26 181541](https://github.com/user-attachments/assets/a1d367e3-aaf6-4119-aa1a-882c4b192169)
