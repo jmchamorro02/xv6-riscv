@@ -1,4 +1,6 @@
-#Pasos seguidos para la instalacion de Xv6
+##Pasos seguidos para la instalacion de Xv6
+
+
 0. Ya tenia instalado WSL entonces no tuve que instalarlo para comenzar esta tarea
 1. Hacer un fork en el repositorio del MIT para poder asi despues clonarlo en mi subsistema de linux en mi computador
 2. Depues de haber instalado las dependencias necesarias pude terminar la instalacion y usar finalmente Xv6 correctamente
