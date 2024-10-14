@@ -124,7 +124,9 @@ allocproc(void)
 found:
   p->pid = allocpid();
   p->state = USED;
-
+  
+  p->prioridad = 0;
+  p->boost = 1;
   // Allocate a trapframe page.
   if((p->trapframe = (struct trapframe *)kalloc()) == 0){
     freeproc(p);
@@ -461,14 +463,21 @@ scheduler(void)
         // Switch to chosen process.  It is the process's job
         // to release its lock and then reacquire it
         // before jumping back to us.
-        p->state = RUNNING;
-        c->proc = p;
-        swtch(&c->context, &p->context);
+        p->prioridad += p->boost;
+        if (p->prioridad >= 9) {
+         p->boost = -1;
+	} else if (p->prioridad <=0) {
+	 p->boost = 1;
+	}
 
         // Process is done running for now.
         // It should have changed its p->state before coming back.
-        c->proc = 0;
+        p->state = RUNNING;
+	c->proc = p;
         found = 1;
+	swtch(&c->context, &p->context);
+
+	c->proc = 0;
       }
       release(&p->lock);
     }
