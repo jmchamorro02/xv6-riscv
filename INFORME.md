@@ -13,6 +13,7 @@
 3. **Pruebas para Verificar `mprotect` y `munprotect`**:
    - Se creo archivo de prueba:
      - **`test_mprotect.c`**: Este archivo prueba la funcionalidad de `mprotect` aplicando la protección de solo lectura y verificando que una escritura en la página protegida cause una trampa. Tambien se puede verificar la funcionalidad de `munprotect` si es que se quita el intento de escritura 'ilegal'
+![Screenshot 2024-11-11 232331](https://github.com/user-attachments/assets/feb88a60-08ed-4e82-909e-fde5afb3a69c)
 
 
 4. **Mensajes de Depuración en las Pruebas**:
