@@ -1,31 +1,25 @@
 
-##Pasos seguidos para la Tarea 2
+##Pasos seguidos para la Tarea 4
 
 
-0. Para comenzar la tarea tuve que volver al estado inicial del repositorio original, dado que me surgieron errores al momento de intentar inicializar qemu
-1. Luego de 'empezar de cero' tuve que definir las variables que ibamos a utilizar para el manejo de prioridades, es decir, defini las variables: prioridad y boost, acordemente en el archivo proc.h
-2. Despues de haber definido correctamente las variables, tuve que editar el archivo proc.c para que las funciones ya existentes de allocproc() y scheduler() contemplaran los cambios que pretendia hacer dentro de xv6. En allocproc() tuve que simplemente agregar dos punteros a las variables previamentes definidas en proc.h, tal como muestra en la siguiente imagen:
-   
-![image](https://github.com/user-attachments/assets/5dbbe08b-eb10-4f5d-adf2-72259e88e8d3)
+0.Al igual que con todas las otras tareas, tuve que volver al estado original de xv6 para que no hubieran conflictos que no fueran faciles de arreglar.
+
+1. Luego de confirmar que el sistema estaba en un estado funcional, edite la estructura inode en el archivo fs.h para agregar un nuevo campo permissions que manejaría los permisos básicos de los archivos (lectura, escritura, ambos). Inicialmente, todos los archivos se configuraron con permisos 3 (lectura/escritura).
+![image](https://github.com/user-attachments/assets/8b80fccb-ae52-4056-a41f-5d005c443074)
 
 
-En cambio, en la funcion scheduler tuve que hacer un cambio completo de las reglas de procesamiento del sistema opertativo, para poder asi cumplir con lo solicitado, asi terminaba quedando parte el codigo dentro de la funcion.
+2. Despues, modifiqué las funciones principales relacionadas con la apertura, lectura y escritura de archivos, ubicadas en sysfile.c y file.c. Estas funciones fueron ajustadas para verificar y respetar los permisos configurados en el inode. Esto incluyo agregar condiciones para evitar operaciones no permitidas, como intentar escribir en un archivo marcado como solo lectura.
 
+3. Implemente la llamada al sistema chmod, añadiendo su definicion en los archivos correspondientes (syscall.h, syscall.c, y user.h). Esta llamada permite cambiar los permisos de un archivo a través de su nombre y un modo numérico (0, 1, 2 o 3). Una vez realizados estos cambios, creé un programa de prueba chmod.c . Este programa realiza operaciones básicas como crear un archivo, escribir en él, cambiar sus permisos, verificar restricciones y restaurar permisos. Este paso permitió validar que las modificaciones funcionaran correctamente.
 
-![image](https://github.com/user-attachments/assets/34605754-15f9-4ab8-93cc-75bda6ae2d42)
+4. Finalmente, agregué el permiso especial "inmutable" (5) al sistema. Este permiso, una vez aplicado a un archivo, impide tanto su modificación como cualquier cambio en sus permisos. Se ajustó la llamada a chmod para manejar este caso especial. También se actualizó el programa de prueba para validar esta funcionalidad.
 
-
-4. Ya habiendo hecho estos cambios recien pude empezar a crear un archivo test_prioridad.c para poder testear estos cambios y obtener los resultados esperados. Para cumplir los requisitos pedidos por la tarea, se creo un simple bucle que creara veinte procesos para asi asignarles distintas prioridades y entregar en la consola con sus respectivos valores de prioridad. Aqui se ve el codigo creado.
-
-   
-![image](https://github.com/user-attachments/assets/56ce3066-4e78-4934-bb82-22c2c73a6454)
-
-
+Aqui se puede ver los resultados de cada una de estas funcionalidades implementadas
+![Screenshot 2024-11-29 204803](https://github.com/user-attachments/assets/3b1e56aa-598d-44f4-bd4c-7853f4cf7d87)
 
 ##Problemas y Soluciones
 
-Un gran problema que tuve, como mencione previamente, tuve que empezar de cero ya que estaba teniendo errores constantemente al momento de inciar qemu antes de siquiera agregar o alterar cualquier archivo. Despues de varios intentos tratando de arreglarlo, pude volver a comenzar a empezar la tarea de manera correcta. Otro problema que tuve, fueron las instrucciones vagas de la tarea y la poca documentacion para solucionar mis problemas los cuales iba enfrentando. Estos problemas me dificultaron bastante el desarrollo de esta tarea, teniendo que pasar varias horas desarrollando y balanceando con las demas responsabilidades de los otros ramos. Ya habiendo superado estos 'pequeños' percances, pude completar de manera satisfactoria para mi, la tarea.    
+Similarmente a las demas tareas, mis problemas siempre fueron la poca documentacion sobre xv6 y como utilizarlo correctamente y hacer debugging sea necesario. Ademas de tener que siempre volver a frustrarme cuando se empiezan a cruzar los cables y comienza a fallar incluso las funcionalidades mas minimas de xv6 y qemu.
 
 
-![Screenshot 2024-10-14 204542](https://github.com/user-attachments/assets/0eaeefef-fb02-4b01-bb2d-4df058bfe214)
 
